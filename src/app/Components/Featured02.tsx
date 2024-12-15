@@ -3,10 +3,10 @@ import Image from 'next/image';
 
 export const Featured02 = () => {
   return (
-    <div className='max-md:1/4  lg:h-[777px]  mt-20  '>
+    <div className=' max-md:flex max-md:flex-col max-md:justify-center max-md:items-center lg:h-[777px]  mt-20  '>
 <div className='flex flex-col justify-center items-center gap-7 p-4 '>
 <div className='w-[773px] h-[24px] ml-[450px]'><h1 className='text-4xl max-md:text-3xl font-medium'> Top Picks For You </h1></div>
-<p className='text-base font-medium text-center'> Find a bright ideal to suite your taste with our graet selection of suspension, floor and table lights</p>
+<p className='text-base font-medium text-center max-md:w-[420px]'> Find a bright ideal to suite your taste with our graet selection of suspension, floor and table lights</p>
 </div>
 
 
@@ -42,7 +42,8 @@ export const Featured02 = () => {
 
 
 </div>
-<div className='flex justify-center text-xl font-medium'><button> View More</button></div>
+<div className='flex flex-col gap-3 justify-center items-center text-xl font-medium'><button> View More</button>
+<Image src="/Line110.png" alt="img" height={0} width={115} /></div>
     </div>
   )
 }

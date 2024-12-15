@@ -2,13 +2,19 @@ import React from 'react'
 import Image from 'next/image'
 import { Clock } from 'lucide-react'
 import { Calendar } from 'lucide-react'
+import Link from 'next/link'
 
 export const Blogs = () => {
   return (
-    <div className=''>
+    <div className='flex flex-col gap-32'>
+   
+   
+    <div>
         <div className='flex flex-col justify-center items-center mt-11'> {/*upper section*/}
-            <div className='w-[174px] h-[64px]'><h1 className='text-4xl font-medium'>Our Blogs</h1></div>
-            <p>Find a bright ideal to suit your taste with our great selection </p>
+            <div className='w-[174px] h-[64px]'><Link href="/Blog"><h1 className='text-4xl font-medium'>Our Blogs</h1></Link></div>
+            <p className='text-[#9F9F9F]'>Find a bright ideal to suit your taste with our great selection </p>
+            
+        
         </div> 
             
         
@@ -24,9 +30,10 @@ export const Blogs = () => {
 
 <div className='flex flex-col gap-3 justify-center items-center mt-4 max-sm:w-[250px] w-[280px]'>
 <p className='text-lg font-normal max-sm:text-base'>Going all-in with millenial design</p>
-<button className='text-xl max-sm:text-lg font-medium'>Read More</button>
+<Link href="/Blog"><button className='text-xl max-sm:text-lg font-medium'>Read More</button></Link>
+<Image src="/Line110.png" alt="img" height={0} width={115} />
 <div className='flex gap-2'>
-   <div className='flex'> <Clock /><p > 5 min</p></div>
+   <div className='flex'> <Clock /><p className='text-base'> 5 min</p></div>
     <div className='flex'><Calendar /><p>12th Oct 2022</p></div>
 </div>
 </div>
@@ -39,10 +46,11 @@ export const Blogs = () => {
 <div className='w-[270px] h-[270px] max-sm:w-[220px] max-sm:h-[220px]'><Image src="/Rectangle2.png" alt="img" height={393} width={393}></Image>
 <div className='flex flex-col gap-3 justify-center items-center mt-4 w-[280px] max-sm:w-[250px]'>
 <p className='text-lg font-normal max-sm:text-base'>Going all-in with millenial design</p>
-<button className='text-xl font-medium max-sm:text-lg'>Read More</button>
+<Link href="/Blog"><button className='text-xl font-medium max-sm:text-lg'>Read More</button></Link>
+<Image src="/Line110.png" alt="img" height={0} width={115} />
 <div className='flex gap-2'>
-   <div className='flex'> <Clock /><p > 5 min</p></div>
-    <div className='flex'><Calendar /><p>12th Oct 2022</p></div>
+   <div className='flex'> <Clock /><p className='text-base '> 5 min</p></div>
+    <div className='flex'><Calendar /><p className='text-base '>12th Oct 2022</p></div>
 </div>
 </div>
 </div>
@@ -54,7 +62,8 @@ export const Blogs = () => {
 <div className='w-[270px] h-[270px] max-sm:w-[220px] max-sm:h-[220px]'><Image src="/Rectangle3.png" alt="img" height={393} width={393}></Image>
 <div className='flex flex-col gap-3 justify-center items-center mt-4 w-[280px] max-sm:w-[250px]'>
 <p className='text-lg font-normal max-sm:text-base'>Going all-in with millenial design</p>
-<button className='text-xl font-medium max-sm:text-lg'>Read More</button>
+<Link href="/Blog"><button className='text-xl font-medium max-sm:text-lg'>Read More</button></Link>
+<Image src="/Line110.png" alt="img" height={0} width={115} />
 <div className='flex gap-2'>
    <div className='flex'> <Clock /><p > 5 min</p></div>
     <div className='flex'><Calendar /><p>12th Oct 2022</p></div>
@@ -64,23 +73,21 @@ export const Blogs = () => {
 
 </div>
 
-
 </div>
 
 
 
+</div>
+{/* View All Posts Button - Centered */}
+<div className='flex flex-col items-center gap-4 justify-center mt-24'>
+        <Link href="/Blog">
+          <button className='text-xl font-medium max-sm:text-lg'>
+            View All Posts
+          </button>
+        </Link>
+        <Image src="/Line110.png" alt="img" height={0} width={115} />
+      </div>
 
-
-
-
-
-
-        
-
-
-
-    
-    
-    </div>
+</div>
   )
 }

@@ -5,7 +5,7 @@ export const Footer2 = () => {
   return (
     <div className='mb-9'>
     <div className='flex mt-32 justify-around max-md:flex max-md:flex-col max-md:gap-2 max-md:items-center  '>
-<div className='w-[250px] h-[72px] font-medium'>
+<div className='w-[250px] h-[72px] font-medium mt-24'>
     <p className='text-[#9F9F9F]'>400 University Drive Suite 200 Coral Gables FL 33134 USA</p>
 </div>
 

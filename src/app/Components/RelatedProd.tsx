@@ -35,8 +35,9 @@ export const RelatedProd = () => {
 </div>
 </div>
 
-<div className='flex flex-col justify-center items-center text-xl h- font-medium'>
-<button className='border-x-2'> View More</button>
+<div className='flex flex-col gap-4 justify-center items-center text-xl h- font-medium'>
+<button> View More</button>
+<Image src="/Line110.png" alt="img" height={0} width={115} />
     
     </div>
     </div>
