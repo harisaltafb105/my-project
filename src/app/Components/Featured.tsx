@@ -13,7 +13,7 @@ export const Featured = () => {
 </div>
 
 
-<div className='mr-6 max-sm:w-[450px] '>{/*right side */}
+<div className='mr-6 max-sm:w-[400px] '>{/*right side */}
     <Image src="/Rocketseat.png" alt="Img" width={853} height={1000}></Image>
 </div>
 

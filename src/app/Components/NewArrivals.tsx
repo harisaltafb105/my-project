@@ -4,9 +4,9 @@ import Link from 'next/link';
 
 export const NewArrivals = () => {
   return (
-    <div className="bg-[#FFF9E5] xl:w-4/4 lg:3/4 md:2/4 max-md:1/4">
+    <div className="bg-[#FFF9E5] xl:w-4/4 lg:3/4 md:2/4 max-md:1/4 mt-14 max-sm:mt-8">
       <div className="flex flex-col md:flex-row justify-between items-center gap-3 max-md:flex-col">
-        <div className="p-3 max-sm:w-[480px]">
+        <div className="p-3 max-sm:w-[400px]">
           <Image src="/NArrSofa.png" alt="img" width={750} height={799}></Image>
         </div>
         <div className="lg:w-[310px] h-[200px] flex justify-center items-center flex-col gap-3 text-center">

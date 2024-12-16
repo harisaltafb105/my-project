@@ -3,15 +3,15 @@ import Image from 'next/image';
 
 export const Featured02 = () => {
   return (
-    <div className='max-md:flex max-md:flex-col  max-md:justify-center max-md:items-center lg:h-[777px] mt-20'>
+    <div className='max-md:flex max-md:flex-col  max-md:justify-center max-md:items-center '>
       {/* Title Section */}
       <div className='flex flex-col justify-center items-center gap-7 p-4'>
-        <div className='w-full max-w-[773px] text-center'>
-          <h1 className='text-4xl max-md:text-3xl font-medium'>
+        <div className='w-full max-w-[773px] max-md:w-[300px] text-center'>
+          <h1 className='text-4xl max-md:text-3xl max-sm:w-[300px] font-medium'>
             Top Picks For You
           </h1>
         </div>
-        <p className='text-base font-medium text-center max-md:w-[420px] text-[#9F9F9F]'>
+        <p className='text-base font-medium text-center max-md:w-[400px] max-sm:w-[250px] text-[#9F9F9F]'>
           Find a bright ideal to suit your taste with our great selection of suspension, floor and table lights
         </p>
       </div>
@@ -45,7 +45,7 @@ export const Featured02 = () => {
       </div>
 
       {/* View More Section */}
-      <div className='flex flex-col gap-3 justify-center items-center text-xl font-medium'>
+      <div className='flex flex-col gap-3 justify-center items-center text-xl max-md:mt-8 font-medium'>
         <button>View More</button>
         <Image src="/Line110.png" alt="img" height={0} width={115} />
       </div>

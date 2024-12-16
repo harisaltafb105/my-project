@@ -21,7 +21,7 @@ export const Blogs = () => {
 
 
 
-<div className='flex max-md:flex-col max-md:items-center max-md:justify-center items-center justify-center gap-8  mt-11   '> {/*second main div*/}
+<div className='flex max-md:flex-col max-md:items-center  max-md:justify-center items-center justify-center gap-8  mt-11   '> {/*second main div*/}
 
 
 
@@ -42,15 +42,15 @@ export const Blogs = () => {
 
 
 
-<div className='max-md:h-[330px]'>
+<div className='max-md:h-[330px] max-sm:mt-9'>
 <div className='w-[270px] h-[270px] max-sm:w-[220px] max-sm:h-[220px]'><Image src="/Rectangle2.png" alt="img" height={393} width={393}></Image>
 <div className='flex flex-col gap-3 justify-center items-center mt-4 w-[280px] max-sm:w-[250px]'>
 <p className='text-lg font-normal max-sm:text-base'>Going all-in with millenial design</p>
 <Link href="/Blog"><button className='text-xl font-medium max-sm:text-lg'>Read More</button></Link>
 <Image src="/Line110.png" alt="img" height={0} width={115} />
 <div className='flex gap-2'>
-   <div className='flex'> <Clock /><p className='text-base '> 5 min</p></div>
-    <div className='flex'><Calendar /><p className='text-base '>12th Oct 2022</p></div>
+   <div className='flex'> <Clock /><p className='text-base max-sm:text-sm'> 5 min</p></div>
+    <div className='flex'><Calendar /><p className='text-base max-sm:text-sm '>12th Oct 2022</p></div>
 </div>
 </div>
 </div>
@@ -59,7 +59,7 @@ export const Blogs = () => {
 
 
 
-<div className='w-[270px] h-[270px] max-sm:w-[220px] max-sm:h-[220px]'><Image src="/Rectangle3.png" alt="img" height={393} width={393}></Image>
+<div className='w-[270px] h-[270px] max-sm:mt-9 max-sm:w-[220px] max-sm:h-[220px]'><Image src="/Rectangle3.png" alt="img" height={393} width={393}></Image>
 <div className='flex flex-col gap-3 justify-center items-center mt-4 w-[280px] max-sm:w-[250px]'>
 <p className='text-lg font-normal max-sm:text-base'>Going all-in with millenial design</p>
 <Link href="/Blog"><button className='text-xl font-medium max-sm:text-lg'>Read More</button></Link>
