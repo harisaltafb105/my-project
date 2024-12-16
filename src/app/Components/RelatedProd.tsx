@@ -12,25 +12,25 @@ export const RelatedProd = () => {
 <div className='w-[287px] h-[397px]'>
 <Image src="/Table4.png" alt="img" width={287} height={287}></Image>
 <p className='ml-7'> Trenton modular sofa_3 </p>
-<p className='ml-7'> Rs. 25,000.00</p>
+<p className='ml-7 text-[20px] font-medium'> Rs. 25,000.00</p>
 
 </div>
 <div className='w-[287px] h-[397px]  mt-11'>
 <Image src="/Table1.png" alt="img" width={287} height={287}></Image>
 <p className='mt-9'> Granite dining table with dining chair </p>
-<p> Rs. 25,000.00</p>
+<p className='text-[20px] font-medium'> Rs. 25,000.00</p>
 </div>
 
 <div className='w-[287px] h-[397px]'>
 <Image src="/Table2.png" alt="img" width={287} height={287}></Image>
 <p> Outdoor bar table and stool </p>
-<p> Rs. 25,000.00</p>
+<p className='text-[20px] font-medium'> Rs. 25,000.00</p>
 
 </div>
 <div className='w-[287px] h-[397px]'>
 <Image src="/Table3.png" alt="img" width={287} height={287}></Image>
 <p> Plain console with teak mirror </p>
-<p> Rs. 25,000.00</p>
+<p className='text-[20px] font-medium'> Rs. 25,000.00</p>
 
 </div>
 </div>

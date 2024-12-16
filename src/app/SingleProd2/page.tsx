@@ -13,8 +13,8 @@ const SingleProd2 = () => {
 <Navbar2 />
 <Asgaardhead />
 <Asgaard />
-<RelatedProd />
 <Description />
+<RelatedProd />
 <Footer2 />
 < AsgaardCart />
 

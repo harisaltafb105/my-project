@@ -7,19 +7,19 @@ import Link from 'next/link'
 
 export const Asgaard = () => {
   return (
-    <div className='flex  justify-around max-md:flex max-md:flex-col max-md:justify-center max-md:justify-items-center'>
+    <div className='flex  justify-around  max-md:flex max-md:flex-col max-md:justify-center max-md:justify-items-center'>
 
-<div>
+<div className='max-sm:w-[380px]'>
 <Image src="/Group001.png" alt="img" height={553} width={500}></Image>
 </div>
 
 
-<div className='w-[650px] flex flex-col gap-5'>
-<h2 className='text-[40px] font-normal'>Asgaard Sofa</h2>
-<p className='text-[#9F9F9F] text-2xl font-medium'>Rs.250,000.00</p>
+<div className='w-[470px]  flex flex-col gap-5 mr-24'>
+<h2 className='text-[40px] font-normal max-sm:text-[30px]'>Asgaard Sofa</h2>
+<p className='text-[#9F9F9F] text-2xl font-medium max-sm:text-[20px]'>Rs.250,000.00</p>
 <Image src="/Group002.png" alt="img" width={124} height={20}></Image>
 <p> 5 Customer review</p>
-<p className='max-sm:w-[400px] max-sm:text-sm'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed eius in autem fuga cum ipsum corrupti aliquid quae aliquam molestiae molestias tempore alias placeat soluta, aperiam ab doloribus consequatur reprehenderit!</p>
+<p className='max-sm:w-[350px] max-sm:text-sm'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed eius in autem fuga cum ipsum corrupti aliquid quae aliquam molestiae molestias tempore alias placeat soluta, aperiam ab doloribus consequatur reprehenderit!</p>
 <Image src="/Group003.png" alt="img" width={123} height={63}></Image>
 <p className='text-[#9F9F9F]'>color</p>
 <div className='flex gap-4'>

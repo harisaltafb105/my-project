@@ -12,8 +12,8 @@ import { Asgaardhead } from '../Components/Asgaardhead'
 <Navbar2 />
 <Asgaardhead />
 <Asgaard />
-<RelatedProd />
 <Description />
+<RelatedProd />
 <Footer2 />
 
     </div>

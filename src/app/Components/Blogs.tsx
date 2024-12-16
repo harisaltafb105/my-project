@@ -12,7 +12,7 @@ export const Blogs = () => {
     <div>
         <div className='flex flex-col justify-center items-center mt-11'> {/*upper section*/}
             <div className='w-[174px] h-[64px]'><Link href="/Blog"><h1 className='text-4xl font-medium'>Our Blogs</h1></Link></div>
-            <p className='text-[#9F9F9F]'>Find a bright ideal to suit your taste with our great selection </p>
+            <p className='text-[#9F9F9F] max-sm:w-[250px]'>Find a bright ideal to suit your taste with our great selection </p>
             
         
         </div> 
