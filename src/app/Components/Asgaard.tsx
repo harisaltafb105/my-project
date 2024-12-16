@@ -14,7 +14,7 @@ export const Asgaard = () => {
 </div>
 
 
-<div className='w-[470px]  flex flex-col gap-5 mr-24'>
+<div className='w-[470px] max-sm:w-[400px] flex flex-col gap-5 mr-24'>
 <h2 className='text-[40px] font-normal max-sm:text-[30px]'>Asgaard Sofa</h2>
 <p className='text-[#9F9F9F] text-2xl font-medium max-sm:text-[20px]'>Rs.250,000.00</p>
 <Image src="/Group002.png" alt="img" width={124} height={20}></Image>
