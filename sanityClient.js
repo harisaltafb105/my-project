@@ -1,4 +1,6 @@
 import { createClient } from '@sanity/client';
+import imageUrlBuilder from '@sanity/image-url';
+
 
 
 const client = createClient({
@@ -8,5 +10,8 @@ const client = createClient({
   token: 'skGjm3QG6or29RGYeHH6TGO10B5yDe1F3ud3mnzUGzyv99S5jjnRw8VdMXw2fshIX9POqZqxM17BnFMPAf56jOb7HKjUUQeiP8CujCDZ7f5snZeLOfRNmwtp1YgYZbtlJI1KR8bI2kFNSbtprtg9cLOG10OpI8MvWUZ29qFgAnFLNxI3eOrh', // Replace with your Sanity API token
 });
 
-
+const builder = imageUrlBuilder(client);
+export function urlFor(source) {
+  return builder.image(source);
+}
 export default client;

@@ -42,7 +42,7 @@ export const Navbar2 = () => {
       
       <ul className='flex gap-11  mt-[38px]'>
         <li><Link href="/">Home</Link></li>
-        <li><Link href="/Shop">Shop</Link></li>
+        <li><Link href="/product">Shop</Link></li>
         <li>About</li>
         <li><Link href="/Contact">Contact</Link></li>
       </ul>

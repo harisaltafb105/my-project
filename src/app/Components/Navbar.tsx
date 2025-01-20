@@ -28,7 +28,7 @@ export const Navbar = () => {
       <SheetDescription>
       <ul className='flex flex-col gap-11 mt-5 '>
         <li><Link href="/">Home</Link></li>
-        <li><Link href="/Shop">Shop</Link></li>
+        <li><Link href="/product">Shop</Link></li>
         <li>About</li>
         <li><Link href="/Contact">Contact</Link></li>
       </ul> 
@@ -41,7 +41,7 @@ export const Navbar = () => {
       
       <ul className='flex gap-11 mt-[38px]'>
         <li><Link href="/">Home</Link></li>
-        <li><Link href="/Shop">Shop</Link></li>
+        <li><Link href="/product">Shop</Link></li>
         <li>About</li>
         <li><Link href="/Contact">Contact</Link></li>
       </ul>
