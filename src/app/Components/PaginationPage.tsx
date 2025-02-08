@@ -16,7 +16,7 @@ const PaginationPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 4; // Show 4 products per page
+  const productsPerPage = 2; // Show 2 products per page
 
   useEffect(() => {
     const fetchData = async () => {
