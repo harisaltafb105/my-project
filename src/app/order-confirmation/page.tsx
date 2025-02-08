@@ -2,8 +2,9 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
-const OrderConfirmation = () => {
+const OrderConfirmationContent = () => {
   const searchParams = useSearchParams();
   const orderId = searchParams ? searchParams.get("orderId") : null;
 
@@ -20,6 +21,14 @@ const OrderConfirmation = () => {
         <p>Order ID not found.</p>
       )}
     </div>
+  );
+};
+
+const OrderConfirmation = () => {
+  return (
+    <Suspense fallback={<p>Loading...</p>}>
+      <OrderConfirmationContent />
+    </Suspense>
   );
 };
 
