@@ -39,6 +39,10 @@
 import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 
+export const metadata = {
+  dynamic: "force-dynamic", // ✅ This will force client-side rendering
+};
+
 const OrderConfirmation = () => {
   const searchParams = useSearchParams();
   const [orderId, setOrderId] = useState("");
