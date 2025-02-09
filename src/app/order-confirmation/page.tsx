@@ -37,9 +37,9 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState, Suspense } from "react";
+import { useState, useEffect, Suspense } from "react";
 
-const OrderConfirmation = () => {
+const OrderDetails = () => {
   const searchParams = useSearchParams();
   const [orderId, setOrderId] = useState("");
 
@@ -50,30 +50,36 @@ const OrderConfirmation = () => {
   }, [searchParams]);
 
   return (
-    <Suspense fallback={<p>Loading...</p>}>
-      <div className="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg mt-10">
-        <h2 className="text-2xl font-bold mb-4">Order Confirmed!</h2>
-        {orderId ? (
-          <>
-            <p>Your order has been placed successfully.</p>
-            <p>
-              <strong>Order ID:</strong> {orderId}
-            </p>
-            <p>
-              You can track your order{" "}
-              <a
-                href={`/order-tracking?orderId=${orderId}`}
-                className="text-blue-500 underline"
-              >
-                here
-              </a>
-              .
-            </p>
-          </>
-        ) : (
-          <p>Order ID not found.</p>
-        )}
-      </div>
+    <div className="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg mt-10">
+      <h2 className="text-2xl font-bold mb-4">Order Confirmed!</h2>
+      {orderId ? (
+        <>
+          <p>Your order has been placed successfully.</p>
+          <p>
+            <strong>Order ID:</strong> {orderId}
+          </p>
+          <p>
+            You can track your order{" "}
+            <a
+              href={`/order-tracking?orderId=${orderId}`}
+              className="text-blue-500 underline"
+            >
+              here
+            </a>
+            .
+          </p>
+        </>
+      ) : (
+        <p>Order ID not found.</p>
+      )}
+    </div>
+  );
+};
+
+const OrderConfirmation = () => {
+  return (
+    <Suspense fallback={<p>Loading order details...</p>}>
+      <OrderDetails />
     </Suspense>
   );
 };
