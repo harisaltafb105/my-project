@@ -37,9 +37,9 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 
-const OrderConfirmation = () => {
+const OrderDetails = () => {
   const searchParams = useSearchParams();
   const [orderId, setOrderId] = useState("");
 
@@ -59,17 +59,21 @@ const OrderConfirmation = () => {
             <strong>Order ID:</strong> {orderId}
           </p>
           <p>
-            You can track your order{" "}
-            <span className="text-blue-500 underline cursor-pointer">
-              here
-            </span>
-            .
+            You can track your order <span className="text-blue-500 underline">here</span>.
           </p>
         </>
       ) : (
         <p>Order ID not found.</p>
       )}
     </div>
+  );
+};
+
+const OrderConfirmation = () => {
+  return (
+    <Suspense fallback={<p>Loading...</p>}>
+      <OrderDetails />
+    </Suspense>
   );
 };
 
