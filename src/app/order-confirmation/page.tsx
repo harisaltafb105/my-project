@@ -39,10 +39,6 @@
 import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 
-export const metadata = {
-  dynamic: "force-dynamic", // ✅ This will force client-side rendering
-};
-
 const OrderConfirmation = () => {
   const searchParams = useSearchParams();
   const [orderId, setOrderId] = useState("");
@@ -64,12 +60,9 @@ const OrderConfirmation = () => {
           </p>
           <p>
             You can track your order{" "}
-            <a
-              href={`/order-tracking?orderId=${orderId}`}
-              className="text-blue-500 underline"
-            >
+            <span className="text-blue-500 underline cursor-pointer">
               here
-            </a>
+            </span>
             .
           </p>
         </>
