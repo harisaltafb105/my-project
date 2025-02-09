@@ -37,7 +37,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 
 const OrderConfirmation = () => {
   const searchParams = useSearchParams();
