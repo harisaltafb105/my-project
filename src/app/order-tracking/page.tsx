@@ -121,11 +121,19 @@
 
 // export default OrderTracking;
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import sanityClient from "../../../sanityClient";
 
 const OrderTracking = () => {
+  return (
+    <Suspense fallback={<p className="text-center text-gray-500">Loading order tracking...</p>}>
+      <OrderTrackingContent />
+    </Suspense>
+  );
+};
+
+const OrderTrackingContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const orderId = searchParams?.get("orderId") || ""; // Yeh ab _id hai
