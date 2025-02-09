@@ -75,8 +75,90 @@
 // export default CheckoutPage;
 
 
+// "use client";
+// import { useState, useEffect } from "react";
+// import { loadStripe } from "@stripe/stripe-js";
+// import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
+
+// const stripePromise = loadStripe(process.env.NEXT_PUBLIC_PUBLISHABLE_KEY as string);
+
+// const CheckoutForm = ({ clientSecret }: { clientSecret: string }) => {
+//   const stripe = useStripe();
+//   const elements = useElements();
+//   const [loading, setLoading] = useState(false);
+//   const [errorMessage, setErrorMessage] = useState("");
+
+//   const handleSubmit = async (event: any) => {
+//     event.preventDefault();
+//     if (!stripe || !elements) return;
+
+//     setLoading(true);
+//     setErrorMessage("");
+
+//     const { error } = await stripe.confirmPayment({
+//       elements,
+//       confirmParams: { return_url: `${process.env.NEXT_PUBLIC_SITE_URL}/success` },
+//     });
+
+//     if (error) {
+//       console.error("Payment Error:", error);
+//       setErrorMessage(error.message || "Payment failed.");
+//       setLoading(false);
+//     }
+//   };
+
+//   return (
+//     <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4 bg-white shadow-lg rounded">
+//       <h2 className="text-xl font-bold mb-4">Complete Your Payment</h2>
+//       <PaymentElement />
+//       {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
+//       <button
+//         type="submit"
+//         disabled={!stripe || loading}
+//         className="mt-4 bg-blue-500 text-white p-2 rounded w-full"
+//       >
+//         {loading ? "Processing..." : "Pay Now"}
+//       </button>
+//     </form>
+//   );
+// };
+
+// const CheckoutPage = () => {
+//   const [clientSecret, setClientSecret] = useState<string | null>(null);
+
+//   useEffect(() => {
+//     fetch("/api/stripe", {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify({
+//         items: [{ name: "Alpha Table", price: 900, quantity: 1 }],
+//       }),
+//     })
+//       .then((res) => res.json())
+//       .then((data) => {
+//         console.log("Client Secret Received:", data.clientSecret);
+//         setClientSecret(data.clientSecret);
+//       })
+//       .catch((error) => console.error("Error fetching client secret:", error));
+//   }, []);
+
+//   if (!clientSecret) {
+//     return <p className="text-center text-gray-500">Loading payment details...</p>;
+//   }
+
+//   return (
+//     <Elements stripe={stripePromise} options={{ clientSecret }}>
+//       <CheckoutForm clientSecret={clientSecret} />
+//     </Elements>
+//   );
+// };
+
+// export default CheckoutPage;
+
 "use client";
+
 import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
@@ -85,6 +167,10 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_PUBLISHABLE_KEY as stri
 const CheckoutForm = ({ clientSecret }: { clientSecret: string }) => {
   const stripe = useStripe();
   const elements = useElements();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const orderId = searchParams ? searchParams.get("orderId") : null;
+
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -97,7 +183,7 @@ const CheckoutForm = ({ clientSecret }: { clientSecret: string }) => {
 
     const { error } = await stripe.confirmPayment({
       elements,
-      confirmParams: { return_url: `${process.env.NEXT_PUBLIC_SITE_URL}/success` },
+      confirmParams: { return_url: `${process.env.NEXT_PUBLIC_SITE_URL}/order-tracking?orderId=${orderId}` },
     });
 
     if (error) {
@@ -119,12 +205,24 @@ const CheckoutForm = ({ clientSecret }: { clientSecret: string }) => {
       >
         {loading ? "Processing..." : "Pay Now"}
       </button>
+
+      {orderId && (
+        <button
+          type="button"
+          onClick={() => router.push(`/order-tracking?orderId=${orderId}`)}
+          className="mt-4 bg-green-500 text-white p-2 rounded w-full"
+        >
+          Track Your Order
+        </button>
+      )}
     </form>
   );
 };
 
-const CheckoutPage = () => {
+const NewCheckout = () => {
   const [clientSecret, setClientSecret] = useState<string | null>(null);
+  const searchParams = useSearchParams();
+  const orderId = searchParams ? searchParams.get("orderId") : null;
 
   useEffect(() => {
     fetch("/api/stripe", {
@@ -135,10 +233,7 @@ const CheckoutPage = () => {
       }),
     })
       .then((res) => res.json())
-      .then((data) => {
-        console.log("Client Secret Received:", data.clientSecret);
-        setClientSecret(data.clientSecret);
-      })
+      .then((data) => setClientSecret(data.clientSecret))
       .catch((error) => console.error("Error fetching client secret:", error));
   }, []);
 
@@ -153,6 +248,4 @@ const CheckoutPage = () => {
   );
 };
 
-export default CheckoutPage;
-
-
+export default NewCheckout;
