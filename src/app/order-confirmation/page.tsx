@@ -37,7 +37,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 const OrderConfirmation = () => {
   const searchParams = useSearchParams();
@@ -50,23 +50,31 @@ const OrderConfirmation = () => {
   }, [searchParams]);
 
   return (
-    <div className="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg mt-10">
-      <h2 className="text-2xl font-bold mb-4">Order Confirmed!</h2>
-      {orderId ? (
-        <>
-          <p>Your order has been placed successfully.</p>
-          <p><strong>Order ID:</strong> {orderId}</p>
-          <p>
-            You can track your order{" "}
-            <a href={`/order-tracking?orderId=${orderId}`} className="text-blue-500 underline">
-              here
-            </a>.
-          </p>
-        </>
-      ) : (
-        <p>Order ID not found.</p>
-      )}
-    </div>
+    <Suspense fallback={<p>Loading...</p>}>
+      <div className="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg mt-10">
+        <h2 className="text-2xl font-bold mb-4">Order Confirmed!</h2>
+        {orderId ? (
+          <>
+            <p>Your order has been placed successfully.</p>
+            <p>
+              <strong>Order ID:</strong> {orderId}
+            </p>
+            <p>
+              You can track your order{" "}
+              <a
+                href={`/order-tracking?orderId=${orderId}`}
+                className="text-blue-500 underline"
+              >
+                here
+              </a>
+              .
+            </p>
+          </>
+        ) : (
+          <p>Order ID not found.</p>
+        )}
+      </div>
+    </Suspense>
   );
 };
 
