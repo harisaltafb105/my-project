@@ -89,11 +89,61 @@
 //   return <>{children}</>;
 // };
 
-'use client';
+// 'use client';
 
-import { ClerkProvider, SignInButton, useUser, useClerk } from "@clerk/clerk-react"; 
+// import { ClerkProvider, SignInButton, useUser, useClerk } from "@clerk/clerk-react"; 
+// import { CartProvider } from "./Components/CartContext";
+// import Cart from "./Components/Cart";
+// import "./globals.css";
+
+// export default function RootLayout({ children }: { children: React.ReactNode }) {
+//   return (
+//     <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || ""}>
+//       <html lang="en">
+//         <body className="flex flex-col min-h-screen">
+//           <CartProvider>
+//             {/* 👇 Login/Logout buttons fixed at top-right corner */}
+//             <AuthButtons />
+//             <main className="flex-grow">{children}</main>
+//             <Cart />
+//           </CartProvider>
+//         </body>
+//       </html>
+//     </ClerkProvider>
+//   );
+// }
+
+// // 👇 This will show Login/Logout buttons at the top-right corner
+// const AuthButtons = () => {
+//   const { isLoaded, user } = useUser();
+//   const { signOut } = useClerk();
+
+//   return (
+//     <div className="absolute top-4 right-4">
+//       {isLoaded && user ? (
+//         <button 
+//           className="px-4 py-2 bg-red-500 text-white rounded-md" 
+//           onClick={() => signOut().then(() => window.location.href = "/login")}
+//         >
+//           Logout
+//         </button>
+//       ) : (
+//         <SignInButton>
+//           <button className="px-4 py-2 bg-blue-500 text-white rounded-md">
+//             Login
+//           </button>
+//         </SignInButton>
+//       )}
+//     </div>
+//   );
+// };
+"use client";
+
+import { ClerkProvider, useUser, useClerk } from "@clerk/clerk-react";
 import { CartProvider } from "./Components/CartContext";
 import Cart from "./Components/Cart";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import "./globals.css";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -102,10 +152,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <html lang="en">
         <body className="flex flex-col min-h-screen">
           <CartProvider>
-            {/* 👇 Login/Logout buttons fixed at top-right corner */}
-            <AuthButtons />
-            <main className="flex-grow">{children}</main>
-            <Cart />
+            <AuthWrapper>
+              <Navbar />
+              <main className="flex-grow">{children}</main>
+              <Cart />
+            </AuthWrapper>
           </CartProvider>
         </body>
       </html>
@@ -113,27 +164,39 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   );
 }
 
-// 👇 This will show Login/Logout buttons at the top-right corner
-const AuthButtons = () => {
-  const { isLoaded, user } = useUser();
+// ✅ Ye Wrapper ensure karega ke sirf logged-in user hi site use kar sake
+const AuthWrapper = ({ children }: { children: React.ReactNode }) => {
+  const { isSignedIn, isLoaded } = useUser();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isLoaded && !isSignedIn) {
+      router.replace("/login"); // ✅ Agar login nahi to login page bhej do
+    }
+  }, [isLoaded, isSignedIn, router]);
+
+  if (!isLoaded) {
+    return <div className="flex justify-center items-center h-screen">Loading...</div>;
+  }
+
+  return <>{children}</>;
+};
+
+// ✅ Ye Navbar login hone ke baad Logout button dikhayega
+const Navbar = () => {
+  const { isSignedIn, isLoaded } = useUser();
   const { signOut } = useClerk();
+
+  if (!isLoaded || !isSignedIn) return null; // ✅ Login se pehle kuch bhi na dikhao
 
   return (
     <div className="absolute top-4 right-4">
-      {isLoaded && user ? (
-        <button 
-          className="px-4 py-2 bg-red-500 text-white rounded-md" 
-          onClick={() => signOut().then(() => window.location.href = "/login")}
-        >
-          Logout
-        </button>
-      ) : (
-        <SignInButton>
-          <button className="px-4 py-2 bg-blue-500 text-white rounded-md">
-            Login
-          </button>
-        </SignInButton>
-      )}
+      <button 
+        className="px-4 py-2 bg-red-500 text-white rounded-md" 
+        onClick={() => signOut().then(() => window.location.href = "/login")}
+      >
+        Logout
+      </button>
     </div>
   );
 };
