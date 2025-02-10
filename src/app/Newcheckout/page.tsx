@@ -249,6 +249,7 @@
 // };
 
 // export default NewCheckout;
+//export default NewCheckout;
 "use client";
 
 import { useState, useEffect, Suspense } from "react";
