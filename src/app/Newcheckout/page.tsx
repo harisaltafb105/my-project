@@ -250,12 +250,123 @@
 
 // export default NewCheckout;
 //export default NewCheckout;
+// "use client";
+
+// import { useState, useEffect, Suspense } from "react";
+// import { useRouter, useSearchParams } from "next/navigation";
+// import { loadStripe } from "@stripe/stripe-js";
+// import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
+// import { Navbar2 } from "../Components/Navbar2";
+
+// const stripePromise = loadStripe(process.env.NEXT_PUBLIC_PUBLISHABLE_KEY as string);
+
+// const CheckoutForm = ({ clientSecret, orderId }: { clientSecret: string; orderId: string | null }) => {
+//   const stripe = useStripe();
+//   const elements = useElements();
+//   const router = useRouter();
+
+//   const [loading, setLoading] = useState(false);
+//   const [errorMessage, setErrorMessage] = useState("");
+
+//   const handleSubmit = async (event: any) => {
+//     event.preventDefault();
+//     if (!stripe || !elements) return;
+
+//     setLoading(true);
+//     setErrorMessage("");
+
+//     const { error } = await stripe.confirmPayment({
+//       elements,
+//       confirmParams: { return_url: `${process.env.NEXT_PUBLIC_SITE_URL}/order-tracking?orderId=${orderId}` },
+//     });
+
+//     if (error) {
+//       console.error("Payment Error:", error);
+//       setErrorMessage(error.message || "Payment failed.");
+//       setLoading(false);
+//     }
+//   };
+
+//   return (
+  
+//     <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4 bg-white shadow-lg rounded">
+//       <h2 className="text-xl font-bold mb-4">Complete Your Payment</h2>
+//       <PaymentElement />
+//       {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
+//       <button
+//         type="submit"
+//         disabled={!stripe || loading}
+//         className="mt-4 bg-blue-500 text-white p-2 rounded w-full"
+//       >
+//         {loading ? "Processing..." : "Pay Now"}
+//       </button>
+
+//       {orderId && (
+//         <button
+//           type="button"
+//           onClick={() => router.push(`/order-tracking?orderId=${orderId}`)}
+//           className="mt-4 bg-green-500 text-white p-2 rounded w-full"
+//         >
+//           Track Your Order
+//         </button>
+//       )}
+//     </form>
+//   );
+// };
+
+// const NewCheckout = () => {
+//   const [clientSecret, setClientSecret] = useState<string | null>(null);
+
+//   return (
+//     <Suspense fallback={<p className="text-center text-gray-500">Loading...</p>}>
+//       <NewCheckoutContent clientSecret={clientSecret} setClientSecret={setClientSecret} />
+//     </Suspense>
+//   );
+// };
+
+// const NewCheckoutContent = ({
+//   clientSecret,
+//   setClientSecret,
+// }: {
+//   clientSecret: string | null;
+//   setClientSecret: React.Dispatch<React.SetStateAction<string | null>>;
+// }) => {
+//   const searchParams = useSearchParams();
+//   const orderId = searchParams ? searchParams.get("orderId") : null;
+
+//   useEffect(() => {
+//     fetch("/api/stripe", {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify({
+//         items: [{ name: "Alpha Table", price: 900, quantity: 1 }],
+//       }),
+//     })
+//       .then((res) => res.json())
+//       .then((data) => setClientSecret(data.clientSecret))
+//       .catch((error) => console.error("Error fetching client secret:", error));
+//   }, []);
+
+//   if (!clientSecret) {
+//     return <p className="text-center text-gray-500">Loading payment details...</p>;
+//   }
+
+//   return (
+//     <Elements stripe={stripePromise} options={{ clientSecret }}>
+//       <CheckoutForm clientSecret={clientSecret} orderId={orderId} />
+//     </Elements>
+//   );
+// };
+
+// export default NewCheckout;
 "use client";
 
 import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { Navbar2 } from "../Components/Navbar2"; // Importing Navbar2
+import { Footer2 } from "../Components/Footer2";// ✅ Importing Footer2
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_PUBLISHABLE_KEY as string);
 
@@ -314,11 +425,28 @@ const CheckoutForm = ({ clientSecret, orderId }: { clientSecret: string; orderId
 
 const NewCheckout = () => {
   const [clientSecret, setClientSecret] = useState<string | null>(null);
+  const router = useRouter(); // Using router for back navigation
 
   return (
-    <Suspense fallback={<p className="text-center text-gray-500">Loading...</p>}>
-      <NewCheckoutContent clientSecret={clientSecret} setClientSecret={setClientSecret} />
-    </Suspense>
+    <>
+      <Navbar2 /> {/* ✅ Rendering Navbar2 */}
+
+      {/* Back Button - Positioned at the Top Left */}
+      <div className="relative">
+        <button
+          onClick={() => router.back()}
+          className="absolute top-4 left-4 bg-gray-500 text-white px-3 py-1 text-sm rounded"
+        >
+          Back
+        </button>
+      </div>
+
+      <Suspense fallback={<p className="text-center text-gray-500">Loading...</p>}>
+        <NewCheckoutContent clientSecret={clientSecret} setClientSecret={setClientSecret} />
+      </Suspense>
+
+      <Footer2 /> {/* ✅ Rendering Footer2 at the end */}
+    </>
   );
 };
 

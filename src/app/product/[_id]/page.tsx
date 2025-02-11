@@ -2,7 +2,7 @@ import { Navbar2 } from "@/app/Components/Navbar2";
 import { client } from "@/sanity/lib/client";
 import ProductDetail from "@/app/Components/NewProductDetail"; // Import ProductDetail component
 import React from "react";
-
+import { Footer2 } from "@/app/Components/Footer2";
 
 export default async function productdetail({ params }: { params: { _id: string } }) {
   const { _id } = params;
@@ -38,6 +38,7 @@ export default async function productdetail({ params }: { params: { _id: string 
       <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md mt-10">
         <ProductDetail product={product} />
       </div>
+      <Footer2 />
     </div>
   );
 }
