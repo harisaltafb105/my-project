@@ -233,7 +233,6 @@
 "use client";
 import { useState, useEffect, Suspense } from "react";
 import { useRouter } from "next/navigation";
-import sanityClient from "../../../sanityClient";
 
 const OrderTracking = () => {
   return (
@@ -250,7 +249,6 @@ const OrderTrackingContent = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // ✅ Fix: `useSearchParams` ko `useEffect` ke andar move kiya
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     setOrderId(searchParams.get("orderId"));
@@ -262,35 +260,18 @@ const OrderTrackingContent = () => {
     const fetchOrderDetails = async () => {
       try {
         setLoading(true);
-        console.log("Fetching order with _id:", orderId);
+        console.log("Fetching order with orderId:", orderId);
 
-        const query = `*[_id == $orderId][0] {
-          _id,
-          firstName,
-          lastName,
-          address,
-          city,
-          postalCode,
-          country,
-          totalAmount,
-          paymentStatus,
-          status,
-          estimatedDelivery,
-          cartItems[]-> { name, price, quantity }
-        }`;
-
-        const order = await sanityClient.fetch(query, { orderId });
-
-        if (order) {
-          console.log("Fetched Order Data:", order);
-          setOrderData(order);
-        } else {
-          console.error("Order not found.");
-          setError("Order not found.");
+        const response = await fetch(`/api/trackOrder?orderId=${orderId}`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch order details");
         }
-      } catch (error) {
+
+        const order = await response.json();
+        setOrderData(order);
+      } catch (error: any) {
         console.error("Error fetching order:", error);
-        setError("Something went wrong while fetching the order.");
+        setError(error.message);
       } finally {
         setLoading(false);
       }

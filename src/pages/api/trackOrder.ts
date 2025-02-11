@@ -37,41 +37,36 @@
 //     totalAmount: 1500, // Example amount
 //   };
 // }
-// import { NextApiRequest, NextApiResponse } from "next";
-// import sanityClient from "../../../sanityClient";
+import { NextApiRequest, NextApiResponse } from "next";
+import sanityClient from "../../../sanityClient";
 
-// const trackOrder = async (req: NextApiRequest, res: NextApiResponse) => {
-//   const { orderId } = req.query;
+const trackOrder = async (req: NextApiRequest, res: NextApiResponse) => {
+  try {
+    const orderId = req.query.orderId as string;
 
-//   if (!orderId || Array.isArray(orderId)) {
-//     return res.status(400).json({ message: "Order ID is required and must be a string" });
-//   }
+    if (!orderId) {
+      return res.status(400).json({ message: "Order ID is required" });
+    }
 
-//   try {
-//     console.log("Fetching order with _id:", orderId);
+    console.log("Fetching order with _id:", orderId);
 
-//     const query = `*[_id == $orderId][0] {
-//       _id, firstName, lastName, address, city, postalCode, country,
-//       totalAmount, paymentStatus, status, estimatedDelivery,
-//       cartItems[]-> { name, price, quantity }
-//     }`;
+    const query = `*[_id == $orderId][0] {
+      _id, firstName, lastName, address, city, postalCode, country,
+      totalAmount, paymentStatus, status, estimatedDelivery,
+      cartItems[]-> { name, price, quantity }
+    }`;
 
-//     console.log("Sanity Query:", query);
+    const orderDetails = await sanityClient.fetch(query, { orderId });
 
-//     const orderDetails = await sanityClient.fetch(query, { orderId });
+    if (!orderDetails) {
+      return res.status(404).json({ message: "Order not found" });
+    }
 
-//     if (!orderDetails) {
-//       console.error("Order not found in Sanity");
-//       return res.status(404).json({ message: "Order not found" });
-//     }
+    res.status(200).json(orderDetails);
+  } catch (error: any) {
+    console.error("Error fetching order details:", error);
+    res.status(500).json({ message: "Error fetching order details", error: error.message });
+  }
+};
 
-//     console.log("Fetched Order Data:", orderDetails);
-
-//     res.status(200).json(orderDetails);
-//   } catch (error) {
-//     console.error("Error fetching order details:", error);
-//     res.status(500).json({ message: "Error fetching order details", error: (error as any).message });
-//   }
-// };
-
-// export default trackOrder;
+export default trackOrder;
