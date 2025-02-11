@@ -37,49 +37,41 @@
 //     totalAmount: 1500, // Example amount
 //   };
 // }
-import { NextApiRequest, NextApiResponse } from "next";
-import sanityClient from "../../../sanityClient"; // Ensure this is correct
+// import { NextApiRequest, NextApiResponse } from "next";
+// import sanityClient from "../../../sanityClient";
 
-const trackOrder = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { orderId } = req.query;
+// const trackOrder = async (req: NextApiRequest, res: NextApiResponse) => {
+//   const { orderId } = req.query;
 
-  if (!orderId || Array.isArray(orderId)) {
-    return res.status(400).json({ message: "Order ID is required and must be a string" });
-  }
+//   if (!orderId || Array.isArray(orderId)) {
+//     return res.status(400).json({ message: "Order ID is required and must be a string" });
+//   }
 
-  try {
-    const orderDetails = await getOrderDetails(orderId as string);
+//   try {
+//     console.log("Fetching order with _id:", orderId);
 
-    if (!orderDetails) {
-      return res.status(404).json({ message: "Order not found" });
-    }
+//     const query = `*[_id == $orderId][0] {
+//       _id, firstName, lastName, address, city, postalCode, country,
+//       totalAmount, paymentStatus, status, estimatedDelivery,
+//       cartItems[]-> { name, price, quantity }
+//     }`;
 
-    res.status(200).json(orderDetails);
-  } catch (error) {
-    console.error("Error fetching order:", error);
-    res.status(500).json({ message: "Error fetching order details", error });
-  }
-};
+//     console.log("Sanity Query:", query);
 
-export default trackOrder;
+//     const orderDetails = await sanityClient.fetch(query, { orderId });
 
-// ✅ Sanity se data fetch karne ka actual function
-async function getOrderDetails(orderId: string) {
-  const query = `*[_id == $orderId][0] {
-    _id,
-    firstName,
-    lastName,
-    address,
-    city,
-    postalCode,
-    country,
-    totalAmount,
-    paymentStatus,
-    status,
-    estimatedDelivery,
-    cartItems[]-> { name, price, quantity }
-  }`;
+//     if (!orderDetails) {
+//       console.error("Order not found in Sanity");
+//       return res.status(404).json({ message: "Order not found" });
+//     }
 
-  const order = await sanityClient.fetch(query, { orderId });
-  return order || null;
-}
+//     console.log("Fetched Order Data:", orderDetails);
+
+//     res.status(200).json(orderDetails);
+//   } catch (error) {
+//     console.error("Error fetching order details:", error);
+//     res.status(500).json({ message: "Error fetching order details", error: (error as any).message });
+//   }
+// };
+
+// export default trackOrder;
